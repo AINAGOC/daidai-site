@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daidai株式会社 — 代々、実る。</title>
+<meta name="description" content="大会運営に特化したソフトウェアをつくる会社。落ちない実のように、止まらない基盤を。">
+<meta property="og:title" content="Daidai株式会社 — 代々、実る。">
+<meta property="og:description" content="大会運営に特化したソフトウェアをつくる会社。落ちない実のように、止まらない基盤を。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --daidai: #D4690A;
+    --daidai-hi: #EA8C20;
+    --daidai-sh: #A85208;
+    --navy: #1A1F36;
+    --cream: #FAFAF8;
+    --gray-100: #F0EFEC;
+    --gray-200: #E5E4E0;
+    --gray-400: #9C9B97;
+    --gray-600: #6B6A66;
+    --calyx: #5A7A3A;
+    --teal: #0D7377;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: var(--navy);
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(250, 250, 248, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    padding: 14px 40px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .nav-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--daidai);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .nav-mark span {
+    position: absolute;
+    font-family: 'Inter', sans-serif;
+    font-size: 31px;
+    font-weight: 600;
+    color: white;
+    top: 0px;
+    left: 3px;
+    line-height: 1;
+  }
+  .nav-wordmark {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: 0.03em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-600);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover {
+    color: var(--daidai);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 120px 40px 80px;
+    text-align: center;
+  }
+  .hero-logo {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero-mark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 35% 30%, var(--daidai-hi) 0%, var(--daidai) 50%, var(--daidai-sh) 100%);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .hero-mark span {
+    position: absolute;
+    font-family: 'Inter', sans-serif;
+    font-size: 76px;
+    font-weight: 500;
+    color: white;
+    top: 6px;
+    left: 12px;
+    line-height: 1;
+  }
+  .hero-mark-calyx {
+    position: absolute;
+    top: -4px;
+    right: 12px;
+    z-index: 2;
+  }
+  .hero-wordmark {
+    font-size: 54px;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    position: relative;
+    top: -1px;
+  }
+  .hero-tagline {
+    font-size: 44px;
+    font-weight: 500;
+    color: var(--daidai);
+    letter-spacing: 0.12em;
+    font-family: 'Noto Sans JP', sans-serif;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 15px;
+    color: var(--gray-600);
+    letter-spacing: 0.04em;
+    line-height: 1.8;
+    max-width: 440px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.2s forwards;
+  }
+  .hero-scroll span {
+    font-size: 10px;
+    color: var(--gray-400);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .hero-scroll-line {
+    width: 1px;
+    height: 40px;
+    background: var(--gray-400);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 120px 40px;
+  }
+  .section-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gray-400);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .section-heading {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.4;
+    margin-bottom: 48px;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  /* Fade in on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== ABOUT ===== */
+  #about {
+    background: white;
+  }
+  .about-text {
+    font-size: 16px;
+    color: var(--navy);
+    line-height: 2.2;
+    font-family: 'Noto Sans JP', sans-serif;
+    max-width: 680px;
+  }
+  .about-text p {
+    margin-bottom: 28px;
+  }
+  .about-text p:last-child {
+    margin-bottom: 0;
+  }
+  .about-highlight {
+    color: var(--daidai);
+    font-weight: 500;
+  }
+
+  /* ===== SERVICES ===== */
+  #services {
+    background: var(--navy);
+    color: white;
+  }
+  #services .section-label {
+    color: rgba(255,255,255,0.35);
+  }
+  #services .section-heading {
+    color: var(--daidai);
+  }
+  .product-tagline {
+    font-size: 24px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 56px;
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.04em;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .product-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 32px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .product-card:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(212, 105, 10, 0.3);
+  }
+  .product-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(212, 105, 10, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .product-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--daidai);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .product-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+  .product-card p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+  }
+
+  /* ===== PRODUCT DETAIL ===== */
+  #product-detail {
+    background: #161A2B;
+    color: white;
+    padding-top: 0;
+  }
+  .product-intro {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    line-height: 2.0;
+    max-width: 640px;
+    margin-bottom: 64px;
+  }
+  .product-stat-row {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 72px;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+  .product-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .product-stat-num {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--daidai);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .product-stat-unit {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--daidai);
+    opacity: 0.7;
+  }
+  .product-stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.04em;
+  }
+  .feature-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .feature-item {
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .feature-item:nth-child(odd) {
+    padding-right: 40px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .feature-item:nth-child(even) {
+    padding-left: 40px;
+  }
+  .feature-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--daidai);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .feature-content h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 6px;
+  }
+  .feature-content p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
+  }
+  .product-diff {
+    margin-top: 64px;
+    padding: 40px;
+    background: rgba(212, 105, 10, 0.06);
+    border: 1px solid rgba(212, 105, 10, 0.12);
+    border-radius: 12px;
+    text-align: center;
+  }
+  .product-diff p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.9;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .product-diff strong {
+    color: var(--daidai);
+    font-weight: 500;
+  }
+  .product-target {
+    margin-top: 48px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .target-badge {
+    padding: 10px 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 768px) {
+    .feature-list { grid-template-columns: 1fr; }
+    .feature-item:nth-child(odd) { padding-right: 0; border-right: none; }
+    .feature-item:nth-child(even) { padding-left: 0; }
+    .product-stat-row { gap: 32px; }
+    .product-stat-num { font-size: 36px; }
+    .product-diff { padding: 28px; }
+    .product-diff p { font-size: 14px; }
+  }
+
+  /* ===== STORY ===== */
+  #story {
+    background: var(--cream);
+  }
+  .story-en {
+    font-size: 15px;
+    color: var(--gray-600);
+    line-height: 2.0;
+    max-width: 640px;
+    font-style: italic;
+  }
+  .story-en p {
+    margin-bottom: 20px;
+  }
+  .story-en p:last-child {
+    margin-bottom: 0;
+  }
+  .story-en .highlight {
+    color: var(--daidai);
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  /* ===== CONTACT ===== */
+  #contact {
+    background: white;
+    text-align: center;
+  }
+  #contact .section-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .contact-heading {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 16px;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .contact-sub {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin-bottom: 40px;
+    line-height: 1.8;
+  }
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--navy);
+    color: white;
+    text-decoration: none;
+    padding: 16px 40px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .contact-btn:hover {
+    background: #252a42;
+    transform: translateY(-1px);
+  }
+  .contact-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 48px 40px;
+    text-align: center;
+    background: var(--navy);
+  }
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .footer-mark {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--daidai);
+    position: relative;
+  }
+  .footer-mark span {
+    position: absolute;
+    font-family: 'Inter', sans-serif;
+    font-size: 23px;
+    font-weight: 700;
+    color: white;
+    top: 0px;
+    left: 2px;
+    line-height: 1;
+  }
+  .footer-wordmark {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.03em;
+  }
+  .footer-tagline {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em;
+    margin-bottom: 24px;
+  }
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.02em;
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    nav.scrolled { padding: 12px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 80px; }
+    .hero-logo { gap: 16px; }
+    .hero-mark { width: 56px; height: 56px; }
+    .hero-mark span { font-size: 54px; font-weight: 600; top: 2px; left: 7px; }
+    .hero-mark-calyx { display: none; }
+    .hero-wordmark { font-size: 36px; }
+    .hero-tagline { font-size: 28px; }
+    .hero-sub { font-size: 14px; }
+    section { padding: 80px 24px; }
+    .section-heading { font-size: 24px; margin-bottom: 32px; }
+    .about-text { font-size: 15px; line-height: 2.0; }
+    .product-grid { grid-template-columns: 1fr; gap: 20px; }
+    .product-tagline { font-size: 18px; }
+    .contact-heading { font-size: 22px; }
+    footer { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-mark"><span>d</span></div>
+    <span class="nav-wordmark">Daidai</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-logo">
+    <div class="hero-mark">
+      <span>d</span>
+      <svg class="hero-mark-calyx" width="14" height="12" viewBox="0 0 14 12">
+        <path d="M7 10.5 C4.5 8.2 0.8 5.0 1.5 1.5 C3.2 0.2 5.8 2.0 7 2.8 C8.2 2.0 10.8 0.2 12.5 1.5 C13.2 5.0 9.5 8.2 7 10.5Z" fill="#5A7A3A" opacity="0.85"/>
+      </svg>
+    </div>
+    <span class="hero-wordmark">Daidai</span>
+  </div>
+  <div class="hero-tagline">落ちない。</div>
+  <p class="hero-sub">
+    止まらないシステムを、つくる会社。<br>
+    落ちない実のように、止まらない基盤を。
+  </p>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner reveal">
+    <div class="section-label">About</div>
+    <h2 class="section-heading">代々、実る。</h2>
+    <div class="about-text">
+      <p>橙（だいだい）は、冬に実をつけ、春が来ても木から落ちない果実です。前の年の実と新しい実が、同じ枝に並んで揺れている。その姿から「代々栄える」の象徴として、正月の鏡餅に飾られてきました。</p>
+      <p>私たちがこの名を選んだのは、技術にも同じことを信じているからです。</p>
+      <p>良いシステムは、止まらない。前の世代の知見と、新しい技術が共存する。壊れても、春になれば自ら青く戻る回青橙のように、自己回復する力を持っている。</p>
+      <p>Daidaiは、大規模イベント運営SaaS、クラウドセキュリティ、AI業務自動化、Web制作まで、止まらない基盤を提供するテクノロジー企業です。</p>
+      <p class="about-highlight">落ちない実のように、止まらない基盤を。<br>前の実と新しい実が共存するように、引き継がれる運営を。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner reveal">
+    <div class="section-label">Services</div>
+    <h2 class="section-heading" style="color: var(--daidai);">事業領域</h2>
+    <div class="product-tagline">止まらない基盤を、あらゆる領域で。</div>
+    <div class="product-grid">
+      <div class="product-card" style="border-color: rgba(212, 105, 10, 0.25);">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div style="font-size: 10px; color: var(--daidai); letter-spacing: 0.1em; margin-bottom: 8px; font-weight: 600;">FLAGSHIP</div>
+        <h3>AXIS — 大会運営SaaS</h3>
+        <p>数万人規模の国際大会・イベントの運営を一つのプラットフォームに統合。ボランティア・宿泊・輸送・競技運営を横断管理。自己回復アーキテクチャで止まらない。</p>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Azureクラウドセキュリティ</h3>
+        <p>自治体・公共機関向けのAzure環境構築とセキュリティ運用。Entra ID、ゼロトラスト設計、ISMAP対応。10年超の行政システム経験に基づく堅牢な設計。</p>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <h3>AI業務自動化</h3>
+        <p>生成AIを活用した業務プロセスの自動化。情報収集・レポート生成・コンテンツ運用をAIエージェントが24時間稼働。人が動く前に、仕組みが動く。</p>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Web制作</h3>
+        <p>コーポレートサイト・LP・業務Webアプリをスピード構築。デザインからデプロイまでワンストップ。AI活用で高品質を短納期で実現。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AXIS DETAIL -->
+<section id="product-detail">
+  <div class="section-inner reveal">
+    <div class="section-label" style="color: rgba(255,255,255,0.35);">Flagship Product</div>
+    <h2 style="font-size: 32px; font-weight: 600; color: var(--daidai); margin-bottom: 12px; font-family: 'Noto Sans JP', sans-serif;">AXIS</h2>
+    <div style="font-size: 20px; font-weight: 500; color: rgba(255,255,255,0.9); margin-bottom: 40px; font-family: 'Noto Sans JP', sans-serif; letter-spacing: 0.04em;">動かす人を、止めない。</div>
+    <p class="product-intro">
+      AXIS は、数万人規模の大会・国際イベントの運営を一つのプラットフォームで完結させるSaaS。<br>
+      Excel管理、紙の指示書、当日の電話連絡 — その全てを置き換える。
+    </p>
+
+    <div class="product-stat-row">
+      <div class="product-stat">
+        <div><span class="product-stat-num">10</span><span class="product-stat-unit">年+</span></div>
+        <span class="product-stat-label">自治体システム開発経験</span>
+      </div>
+      <div class="product-stat">
+        <div><span class="product-stat-num">50,000</span><span class="product-stat-unit">人</span></div>
+        <span class="product-stat-label">規模の大会運営に対応</span>
+      </div>
+      <div class="product-stat">
+        <div><span class="product-stat-num">99.9</span><span class="product-stat-unit">%</span></div>
+        <span class="product-stat-label">目標稼働率（冗長構成）</span>
+      </div>
+    </div>
+
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <div class="feature-content">
+          <h4>ボランティア管理</h4>
+          <p>募集・選考・配置・シフト管理・当日のチェックインまで。AI活用のスキルマッチングで最適な人員配置を実現。</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <div class="feature-content">
+          <h4>宿泊・輸送管理</h4>
+          <p>選手・スタッフの宿泊割当、送迎バスのルート最適化、リアルタイムの配車状況を一元管理。</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <div class="feature-content">
+          <h4>競技運営</h4>
+          <p>種目別のスケジュール管理、会場割当、審判配置、リザルト管理をシームレスに連携。</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <div class="feature-content">
+          <h4>認証・セキュリティ</h4>
+          <p>Azure Entra IDベースの認証基盤。アクセス権限を役割・エリア・時間帯で細かく制御。</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <div class="feature-content">
+          <h4>リアルタイムダッシュボード</h4>
+          <p>大会全体のオペレーション状況をリアルタイムで可視化。異常検知時は即座にアラート。</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <div class="feature-content">
+          <h4>多言語対応</h4>
+          <p>国際大会を見据えた多言語UI。ボランティア向けの通知やマニュアルも自動翻訳に対応。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-diff">
+      <p>大手SIerは汎用システムを大会に合わせる。<br><strong>私たちは、大会運営だけを10年つくり続けてきた。</strong></p>
+    </div>
+
+    <div class="product-target">
+      <span class="target-badge">国際スポーツ大会</span>
+      <span class="target-badge">地方自治体イベント</span>
+      <span class="target-badge">大規模フェスティバル</span>
+      <span class="target-badge">博覧会・万博</span>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="section-inner reveal">
+    <div class="section-label">Story</div>
+    <h2 class="section-heading">Bear fruit. Stand firm.</h2>
+    <div class="story-en">
+      <p>In Japan, there is a citrus called <em>daidai</em> — the bitter orange. It bears fruit in winter, and unlike most citrus, it does not fall from the tree when spring comes. Instead, last year's fruit and this year's fruit hang side by side on the same branch.</p>
+      <p>We chose this name because we believe technology should work the same way.</p>
+      <p>Good systems do not fall. They carry forward what the last generation learned while making room for what comes next. When something breaks, they recover on their own — the way the bitter orange turns green again each spring.</p>
+      <p>Daidai builds operations software for large-scale events — the kind where tens of thousands of people need to be in the right place at the right time. We turn institutional knowledge into repeatable infrastructure, so that this year's event becomes the foundation for the next.</p>
+      <p class="highlight">A fruit that does not fall. A system that does not stop.<br>That is Daidai.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner reveal">
+    <div class="section-label">Contact</div>
+    <div class="contact-heading">お問い合わせ</div>
+    <p class="contact-sub">
+      大会運営のDXや、AXISについてのご質問は<br>お気軽にご連絡ください。
+    </p>
+    <a href="mailto:shota@daidai.co.jp" class="contact-btn">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      メールで問い合わせる
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="footer-mark"><span>d</span></div>
+    <span class="footer-wordmark">Daidai</span>
+  </div>
+  <div class="footer-tagline">代々、実る。</div>
+  <div class="footer-copy">&copy; 2026 Daidai Inc. All rights reserved.</div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
