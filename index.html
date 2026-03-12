@@ -471,23 +471,46 @@
   #story {
     background: var(--cream);
   }
-  .story-en {
-    font-size: 15px;
-    color: var(--gray-600);
-    line-height: 2.0;
-    max-width: 640px;
-    font-style: italic;
+  .story-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    width: 100%;
   }
-  .story-en p {
+  .story-col {
+    font-size: 15px;
+    line-height: 2.0;
+    max-width: 480px;
+  }
+  .story-col p {
     margin-bottom: 20px;
   }
-  .story-en p:last-child {
+  .story-col p:last-child {
     margin-bottom: 0;
   }
-  .story-en .highlight {
+  .story-col-jp {
+    color: var(--navy);
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .story-col-en {
+    color: var(--gray-600);
+    font-style: italic;
+  }
+  .story-col .highlight {
     color: var(--daidai);
     font-weight: 500;
     font-style: normal;
+  }
+  .story-lang-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--gray-400);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 768px) {
+    .story-columns { grid-template-columns: 1fr; gap: 48px; }
   }
 
   /* ===== CONTACT ===== */
@@ -791,14 +814,25 @@
 <!-- STORY -->
 <section id="story">
   <div class="section-inner reveal">
-    <div class="section-label">Story</div>
-    <h2 class="section-heading">Bear fruit. Stand firm.</h2>
-    <div class="story-en">
-      <p>In Japan, there is a citrus called <em>daidai</em> — the bitter orange. It bears fruit in winter, and unlike most citrus, it does not fall from the tree when spring comes. Instead, last year's fruit and this year's fruit hang side by side on the same branch.</p>
-      <p>We chose this name because we believe technology should work the same way.</p>
-      <p>Good systems do not fall. They carry forward what the last generation learned while making room for what comes next. When something breaks, they recover on their own — the way the bitter orange turns green again each spring.</p>
-      <p>Daidai builds operations software for large-scale events — the kind where tens of thousands of people need to be in the right place at the right time. We turn institutional knowledge into repeatable infrastructure, so that this year's event becomes the foundation for the next.</p>
-      <p class="highlight">A fruit that does not fall. A system that does not stop.<br>That is Daidai.</p>
+    <div class="section-label">Brand Story</div>
+    <h2 class="section-heading">代々、実る。 — Bear fruit. Stand firm.</h2>
+    <div class="story-columns">
+      <div class="story-col story-col-jp">
+        <div class="story-lang-label">Japanese</div>
+        <p>橙（だいだい）は、冬に実をつけ、春が来ても木から落ちない果実です。前の年の実と新しい実が、同じ枝に並んで揺れている。その姿から「代々栄える」の象徴として、正月の鏡餅に飾られてきました。</p>
+        <p>私たちがこの名を選んだのは、技術にも同じことを信じているからです。</p>
+        <p>良いシステムは、止まらない。前の世代の知見と、新しい技術が共存する。壊れても、春になれば自ら青く戻る回青橙のように、自己回復する力を持っている。</p>
+        <p>Daidaiは、大会運営に特化したソフトウェアをつくっています。数万人が関わる大規模イベントの裏側を、属人的な経験則から、再現できる仕組みに変えていく。</p>
+        <p class="highlight">代々、実る技術を届けること。それが、私たちの約束です。<br>一つの大会が終わっても、その実は残る。</p>
+      </div>
+      <div class="story-col story-col-en">
+        <div class="story-lang-label">English</div>
+        <p>In Japan, there is a citrus called <em>daidai</em> — the bitter orange. It bears fruit in winter, and unlike most citrus, it does not fall from the tree when spring comes. Instead, last year's fruit and this year's fruit hang side by side on the same branch.</p>
+        <p>We chose this name because we believe technology should work the same way.</p>
+        <p>Good systems do not fall. They carry forward what the last generation learned while making room for what comes next. When something breaks, they recover on their own — the way the bitter orange turns green again each spring.</p>
+        <p>Daidai builds operations software for large-scale events — the kind where tens of thousands of people need to be in the right place at the right time. We turn institutional knowledge into repeatable infrastructure, so that this year's event becomes the foundation for the next.</p>
+        <p class="highlight">A fruit that does not fall. A system that does not stop.<br>That is Daidai.</p>
+      </div>
     </div>
   </div>
 </section>
