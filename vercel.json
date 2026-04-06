@@ -1,6 +1,11 @@
 {
   "rewrites": [
+    { "source": "/privacy", "destination": "/charcount/privacy.html" },
+    { "source": "/support", "destination": "/charcount/support.html" },
     { "source": "/charcount/:path*", "destination": "/charcount/:path*" },
+    { "source": "/ironlog/support", "destination": "/ironlog/support.html" },
+    { "source": "/ironlog/privacy", "destination": "/ironlog/privacy.html" },
+    { "source": "/ironlog/:path*", "destination": "/ironlog/:path*" },
     { "source": "/legal/:path*", "destination": "/legal/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
